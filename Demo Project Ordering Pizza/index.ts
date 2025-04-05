@@ -8,8 +8,15 @@ const menu = [
 ];
 
 let cashInRegister = 100;
-const nextOrderId = 1; // This will be used to assign unique IDs to orders
-const orderQueue = [];
+let nextOrderId = 1; // This will be used to assign unique IDs to orders
+
+interface Order {
+    id: number;
+    pizza: { name: string; price: number };
+    status: string;
+}
+
+const orderQueue: Order[] = [];
 
 /**
  * Challenge: Add a utility function "addNewPizza" that takes a pizza object
@@ -31,6 +38,9 @@ function addNewPizza(pizzaObj) {
 
 function placeOrder(pizzaName) {
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
+    if (!selectedPizza) {
+        throw new Error(`Pizza "${pizzaName}" not found in menu`);
+    }
     cashInRegister += selectedPizza.price;
     const newOrder = { id: nextOrderId++, pizza: selectedPizza, status: "ordered" };
     orderQueue.push(newOrder);
@@ -47,6 +57,9 @@ function placeOrder(pizzaName) {
 
 function completeOrder(orderId) {
     const order = orderQueue.find(order => order.id === orderId);
+    if (!order) {
+        throw new Error(`Order with ID ${orderId} not found`);
+    }
     order.status = "completed";
     return order;
 };
@@ -61,4 +74,3 @@ completeOrder("1");
 console.log("Cash in register: ", cashInRegister);
 console.log("Order Queue: ",orderQueue);
 console.log("Menu: ", menu);
-
