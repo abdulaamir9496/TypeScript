@@ -76,15 +76,12 @@ function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza  {
  * still run.
  */
 
-
-
 /**
  * Challenge part 1: Make it so we can use a global variable to track the nextPizzaId
  * and use the same trick we use with `nextOrderId++` when you're calling addNewPizza.
  * Update the menu items to use this as well so we don't have to manually enter ids 1-4
  * like we're currently doing
  */
-
 
 /**
  * Challenge: add explicit return types to the rest of our functions
@@ -121,6 +118,27 @@ function placeOrder(pizzaName: string): Order | undefined {
 /**
  * Challenge: Fix the warning below by handling the "sad path" scenario!
  */
+
+/**
+ * Challenge: add types our generic `addToArray` function. It should work
+ * for adding new pizzas to the `menu` and adding new orders to the `orderQueue`
+ */
+
+function addToArray<T>(array: T[], item: T): T[] {
+    array.push(item)
+    return array
+}
+
+/**
+ * Mini-challenge: what should be passed in as the generic type on line 53?
+ */
+
+// example usage:
+addToArray<Pizza>(menu, {id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12 })
+addToArray<Order>(orderHistory, { id: nextOrderId++, pizza: menu[2], status: "completed" })
+
+console.log(menu);
+console.log(orderHistory);
 
 export function completeOrder(orderId: number): Order | undefined {
     const order = orderHistory.find(order => order.id === orderId);

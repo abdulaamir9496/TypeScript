@@ -291,7 +291,12 @@ const gameScores = [14, 21, 33, 42, 59]
 const favoriteThings = ["raindrops on roses", "whiskers on kittens", "bright copper kettles", "warm woolen mittens"];
 const voters = [{ name: "Alice", age: 42 }, { name: "Bob", age: 77 }]
 
-function getLastItem<PlaceholderType>(array: PlaceholderType) {
+/**
+ * Challenge: figure out how to explicitly type the return value
+ * of the function!
+ */
+
+function getLastItem<Type>(array: Type[]): Type | undefined {
     return array[array.length - 1]
 }
 
@@ -300,3 +305,8 @@ function getLastItem<PlaceholderType>(array: PlaceholderType) {
  * on each of the 3 arrays above. Hover over different values to see what the Intellisense
  * says about the types for each one.
  */
+
+console.log(getLastItem(gameScores)); // 59
+console.log(getLastItem(favoriteThings)); // "warm woolen mittens"
+console.log(getLastItem(voters)); // { name: "Bob", age: 77 }
+
