@@ -1,4 +1,4 @@
-import { getPizzaDetail } from './index.ts'
+// import { getPizzaDetail } from './index.ts'
 
-console.log(getPizzaDetail(1));
+// console.log(getPizzaDetail(1));
 

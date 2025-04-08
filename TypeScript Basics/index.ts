@@ -173,24 +173,130 @@
 // let userRole: UserRole = "admin"; // Correctly typed as "admin" | "user" | "guest"
 
 //TOPIC: Function return type
-type UserRole= "guest" | "user" | "admin";
+// type UserRole= "guest" | "user" | "admin";
 
-type User = {
-    username: string
-    role: UserRole
+// type User = {
+//     username: string
+//     role: UserRole
+// }
+
+// const users: User[] = [
+//     { username: "Bob", role: "admin" },
+//     { username: "Alice", role: "user" },
+//     { username: "Charlie", role: "guest" }
+// ];
+
+// function fetchUserRole(username: string): User {
+//     const user = users.find(user => user.username === username);
+//     if(!user) {
+//         throw new Error(`User with username ${username} not found`);
+//     }
+//         return user;
+// }
+
+
+//TOPIC: TS-specific types: any
+// let value: any = 1
+// value = "Hello" // No error
+// value = true // No error
+// value = null // No error
+// value = undefined // No error
+// value = {} // No error
+// value = [] // No error
+// value = Symbol() // No error
+// value = BigInt(123) // No error
+// value = () => {} // No error
+// value = new Date() // No error
+// value = new Map() // No error
+// value.toUpperCase(); // Error: Property 'toUpperCase' does not exist on type 'number'.
+// value = "Hi"
+// value.map()
+
+//when should I use any? In short we shouldn't use.
+// Use 'any' when you don't know the type of a variable at compile time
+// Use 'any' when you need to work with dynamic data that can change shape
+// Use 'any' when you are working with third-party libraries that don't have type definitions
+// Use 'any' when you are working with legacy code that doesn't have type definitions
+// Use 'any' when you are working with data that can be of multiple types
+// Use 'any' when you are working with data that can be of any type
+
+//TOPIC: Utility Types & Partial
+
+// type User = {
+//     id: number
+//     username: string
+//     role: "member" | "contributor" | "admin"
+// }
+
+// // type UpdatedUser = {
+// //     id?: number
+// //     username?: string
+// //     role?: "member" | "contributor" | "admin"
+// // }
+
+// type UpdatedUser = Partial<User>
+
+// let nextUserId = 1
+
+// const users: User[] = [
+//     { id: nextUserId++, username: "Bob", role: "admin" },
+//     { id: nextUserId++, username: "Alice", role: "contributor" },
+// ]
+
+// // const users: User[] = [
+// //     { id: 1, username: "Bob", role: "admin" },
+// //     { id: 2, username: "Alice", role: "member" },
+// //     { id: 3, username: "Charlie", role: "contributor" },
+// //     { id: 4, username: "Dave", role: "member" },
+// //     { id: 5, username: "Eve", role: "contributor" }
+// // ];
+
+// function updateUser(id: number, updates: UpdatedUser) {
+//     // Find the user in the array by the id
+//     const foundUser = users.find(user => user.id === id);
+//     if (!foundUser) {
+//         // Use Object.assign to update the found user in place.
+//         console.error("User not found!");
+//         return;
+//     }
+//     // Check MDN if you need help with using Object.assign
+//     Object.assign(foundUser, updates);
+// }
+
+// //Example Updates:
+// // updateUser(1, { username: "new_john_doe"});
+// // updateUser(4, { role: "admin" });
+
+// function addNewUser(newUser: Omit<User, "id" | "user">):User {
+//     const user: User = {
+//         id: nextUserId++,
+//         ...newUser
+//     }
+//     users.push(user);
+//     return user;
+//     // Create a new variable called `user`, add an `id` property to it
+//     // and spread in all the properties of the `newUser` object. Think
+//     // about how you should set the type for this `user` object.
+//     // Push the new object to the `users` array, and return the object
+//     // from the function at the end
+// }
+
+// addNewUser({ username: "new_john_doe", role: "admin" });
+
+// console.log(users);
+
+
+//TOPIC: Generics
+const gameScores = [14, 21, 33, 42, 59]
+const favoriteThings = ["raindrops on roses", "whiskers on kittens", "bright copper kettles", "warm woolen mittens"];
+const voters = [{ name: "Alice", age: 42 }, { name: "Bob", age: 77 }]
+
+function getLastItem<PlaceholderType>(array: PlaceholderType) {
+    return array[array.length - 1]
 }
 
-const users: User[] = [
-    { username: "Bob", role: "admin" },
-    { username: "Alice", role: "user" },
-    { username: "Charlie", role: "guest" }
-];
-
-function fetchUserRole(username: string): User {
-    const user = users.find(user => user.username === username);
-    if(!user) {
-        throw new Error(`User with username ${username} not found`);
-    }
-        return user;
-}
-
+/**
+ * Mini-challenge: call `getLastItem` (and console.log the returned value)
+ * on each of the 3 arrays above. Hover over different values to see what the Intellisense
+ * says about the types for each one.
+ */
