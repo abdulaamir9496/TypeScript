@@ -425,3 +425,84 @@
  * It's used backtik `` for concatination.
  */
 
+// let employee = {
+//     name : "Aamir",
+//     age : 29
+// }
+
+// let stringConcat =  "<div>" +
+//                         "<h1> Name: " + employee.name + "</h1>" +
+//                         "<h1> Age: " + employee.age + "</h1>" +
+//                     "</div>"
+//     document.write(stringConcat);
+//     console.log(stringConcat);
+
+// let student = {
+//     name : "Muqeet",
+//     age : 38
+// }
+
+// let stringConcat1 = `
+//                     <div>
+//                         <h1>Name: ${student.name} <br /> Age: ${student.age}</h1>
+//                     </div>
+// `;
+// document.write(stringConcat1);
+// console.log(stringConcat1);
+
+//TOPIC: What is enum datatype ?
+/**
+ * The Enums are used to define collection of constant
+ * once an enum is declared with some values they are final and they cannot be modified
+ */
+
+// enum Months {
+//     "January" = "JAN",
+//     "February" = "FEB",
+//     "March" = "MAR"
+// }
+
+// let monthName : Months = Months.March;
+// let output : string = `Month name is ${monthName}`;
+// document.write(output);
+// console.log(output);
+
+//TOPIC: Readonly modifier
+/**
+ * Readonly is the modifier in typescript
+ * Readonly members we can only access but we can't edit them
+ * We can initialize readonly members by using constructor
+ */
+
+// class Class_one {
+//     readonly myVar : string;
+
+//     constructor() {
+//         this.myVar = "This is a ReadOnly Modifier which cannot be changed";
+//     };
+// };
+
+// var obj : Class_one = new Class_one();
+// document.write(obj.myVar);
+// console.log(obj.myVar);
+
+// //Let me try to change readonly variableproperty
+// obj.myVar = "Let me try to change readonly";  //Cannot assign to 'myVar' because it is a read-only property
+
+//TOPIC: How to create interface ?
+/**
+ * for creating interface we have to write interface
+ */
+
+interface myInterface {
+    varOne : string;
+};
+
+class Class_one implements myInterface {
+    varOne: string = `I have completed my TypeScript Course`;
+}
+
+const obj : Class_one = new Class_one();
+document.write(obj.varOne);
+console.log(obj.varOne);
+
